@@ -78,7 +78,10 @@ A Chatroom project for CP252
 2. Scalability & Availability: ระบบต้องรองรับการใช้งานจากผู้ใช้จำนวนมากพร้อมกันและต้องพร้อมใช้งานตลอดเวลาโดยมีโอกาสล่มน้อยที่สุด
 3. Reliability & Data Recovery (Backup): ระบบต้องมีกระบวนการสำรองข้อมูล (Backup) ที่สม่ำเสมอและสามารถกู้คืนข้อมูล (Recovery) กลับมาได้ทันทีเมื่อเกิดปัญหาทางเทคนิค
 4. Security ข้อมูลผู้ใช้และการชำระเงินต้องได้รับการเข้ารหัส ป้องกันการเข้าถึงโดยไม่ได้รับอนุญาต และปฏิบัติตามมาตรฐาน PDPA
-   
+
+## Use Case Diagram 
+![UseCaseDiagram](SWUTalk_UseCaseDiagram.png)  
+
 ## สรุป Requriement   
 คลิปวิดีโอ : https://www.youtube.com/watch?v=rnKZ1QF17bc  
 สิ่งที่ได้จากการเก็บ requirement :  
