@@ -82,6 +82,9 @@ A Chatroom project for CP252
 ## Use Case Diagram 
 ![UseCaseDiagram](SWUTalk_UseCaseDiagram.png)  
 
+## Front-end Design
+![FrontDesign](SWUTalk_Frontend_Design.png)
+
 ## สรุป Requriement   
 คลิปวิดีโอ : https://www.youtube.com/watch?v=rnKZ1QF17bc  
 สิ่งที่ได้จากการเก็บ requirement :  
