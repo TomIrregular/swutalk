@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to SWUTalk!</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 100px auto; padding: 20px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .card{
+            background-color: white;
+            border:black 2px; 
+            border-radius: 8px;
+            width: 400px;
+            height: 400px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            padding:20px;
+            
+            h3{
+                margin-top: 20px;
+                
+            }
+            p{
+                margin-top: 20px;
+            }
+            input{
+                margin-top: 20px;
+                border-radius: 4px;
+            }
+            button{
+                border-radius: 20px;
+                background-color: #FB7A7A;
+                margin-top:20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: #FB7A7A;">SWUTALK</h1>
+    <div class="card">
+        <form action="/chat" method="GET">
+            <h2>Register</h2>
+            <p>welcome back!</p>
+            <h3><b>Email : </b></h3>
+            <input type="text" name="username" placeholder="Enter your name" required>
+            <h3><b>Password : </b></h3>
+            <input type="text" name="password" placeholder="Enter your password" required>
+            <button type="submit">Sign In</button>
+        </form>
+        <div>
+            <p>Don't have an account? <a href="/index">Register here!</a></p>
+        </div>
+    </div>
+    
+</body>
+</html>

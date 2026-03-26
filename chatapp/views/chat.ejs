@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Room</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; display: flex; gap: 20px; }
+        .chat-container { flex: 1; }
+        .users-sidebar { width: 200px; border: 1px solid #ccc; padding: 10px; height: fit-content; }
+        .users-sidebar h3 { margin-top: 0; }
+        .user-item { padding: 5px; margin: 2px 0; background: #f0f0f0; border-radius: 3px; }
+        #messages { height: 400px; border: 1px solid #ccc; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+        .message { margin: 5px 0; }
+        .username { font-weight: bold; color: #007bff; }
+        .time { color: #666; font-size: 0.8em; }
+        #messageForm { display: flex; }
+        #messageInput { flex: 1; padding: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Chat Room - Welcome <%= username %>!</h2>
+        <div id="messages"></div>
+        <form id="messageForm">
+            <input id="messageInput" type="text" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="users-sidebar">
+        <h3>Active Users</h3>
+        <div id="usersList"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const username = '<%= username %>';
+        const messages = document.getElementById('messages');
+        const messageForm = document.getElementById('messageForm');
+        const messageInput = document.getElementById('messageInput');
+        const usersList = document.getElementById('usersList');
+
+        socket.emit('join', username);
+
+        window.addEventListener('beforeunload', () => {
+            socket.disconnect();
+        });
+
+        messageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (messageInput.value) {
+                socket.emit('chat message', { message: messageInput.value });
+                messageInput.value = '';
+            }
+        });
+
+        socket.on('chat message', (data) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = `<span class="username">${data.username}:</span> ${data.message} <span class="time">${data.time}</span>`;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        socket.on('user joined', (username) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `<em>${username} joined the chat</em>`;
+            messages.appendChild(messageDiv);
+        });
+
+        socket.on('user left', (username) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.innerHTML = `<em>${username} left the chat</em>`;
+            messages.appendChild(messageDiv);
+        });
+
+        socket.on('users update', (users) => {
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user-item';
+                userDiv.textContent = user;
+                usersList.appendChild(userDiv);
+            });
+        });
+    </script>
+</body>
+</html>
