@@ -64,17 +64,28 @@
         
         // Search listener
         searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
+            const searchKey = e.target.value.toLowerCase();
             const allMessages = messages.getElementsByClassName('message');
 
             Array.from(allMessages).forEach((msg) => {
-                const text = msg.textContent.toLowerCase();
+                const usernameText = msg.querySelector('.username').textContent.toLowerCase();
+                const messageText = msg.querySelector('.body').textContent.toLowerCase();
+                const dateText = msg.querySelector('.time').textContent.toLowerCase();
+                let textChecker = false;
                 
-                if (text.includes(term)) {
-                    msg.style.display = 'block';
-                } else {
-                    msg.style.display = 'none';
+                if (searchKey.startsWith('"@') && searchKey.endsWith('"')) {
+                    const targetUser = searchKey.slice(2,-1);
+                    textChecker = usernameText.includes(targetUser);
+                } 
+                else if (searchKey.startsWith('"date:') && searchKey.endsWith('"')) {
+                    const targetDate = searchKey.slice(6,-1);
+                    textChecker = dateText.includes(targetDate);
                 }
+                else {
+                    textChecker = messageText.includes(searchKey);
+                }
+
+                msg.style.display = textChecker ? 'block' : 'none';
             });
         });
 
@@ -82,7 +93,7 @@
         socket.on('chat message', (data) => {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message';
-            messageDiv.innerHTML = `<span class="username">${data.username}:</span> ${data.message} <span class="time">${data.time}</span>`;
+            messageDiv.innerHTML = `<span class="username">${data.username}:</span> <span class="body">${data.message}</span> <span class="time">${data.time}</span>`;
             messages.appendChild(messageDiv);
             messages.scrollTop = messages.scrollHeight;
         });
