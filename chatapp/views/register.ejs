@@ -41,17 +41,17 @@
 <body>
     <h1 style="color: #FB7A7A;">SWUTALK</h1>
     <div class="card">
-        <form action="/chat" method="GET">
-            <h2>Register</h2>
-            <p>welcome back!</p>
-            <h3><b>Email : </b></h3>
-            <input type="text" name="username" placeholder="Enter your name" required>
-            <h3><b>Password : </b></h3>
-            <input type="text" name="password" placeholder="Enter your password" required>
-            <button type="submit">Sign In</button>
-        </form>
-        <div>
-            <p>Don't have an account? <a href="/index">Register here!</a></p>
+        <h2 style="margin-bottom: 20px">Register</h2>
+        <p>Welcome to SWUTalk!</p>
+        <div style="margin-top: 40px; text-align: center;">
+            <a href="/auth/google" style="text-decoration: none;">
+                <button type="button" style="background-color: #4285F4; border-radius: 4px; font-weight: bold; width: 100%;">
+                    Sign up with Google (@g.swu.ac.th)
+                </button>
+            </a>
+        </div>
+        <div style="margin-top: 20px; text-align: center; color: #555;">
+            <p>Already have an account? <a href="/" style="color: #FB7A7A;">Login here!</a></p>
         </div>
     </div>
     
