@@ -15,6 +15,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID || 'your_client_id_here',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'your_client_secret_here',
@@ -57,7 +59,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
