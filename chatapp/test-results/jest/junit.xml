@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="11" failures="0" errors="0" time="1.262">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-03-30T15:39:29" time="0.487" tests="11">
+    <testcase classname=" Simple filter #1" name=" Simple filter #1" time="0.012">
+    </testcase>
+    <testcase classname=" Simple filter #2" name=" Simple filter #2" time="0.002">
+    </testcase>
+    <testcase classname=" Simple filter #3" name=" Simple filter #3" time="0.002">
+    </testcase>
+    <testcase classname=" Simple filter #4" name=" Simple filter #4" time="0.001">
+    </testcase>
+    <testcase classname=" Simple filter #5" name=" Simple filter #5" time="0.001">
+    </testcase>
+    <testcase classname=" User filter #1" name=" User filter #1" time="0.006">
+    </testcase>
+    <testcase classname=" User filter #2" name=" User filter #2" time="0.001">
+    </testcase>
+    <testcase classname=" User filter #3" name=" User filter #3" time="0.001">
+    </testcase>
+    <testcase classname=" Date filter #1" name=" Date filter #1" time="0.001">
+    </testcase>
+    <testcase classname=" Date filter #2" name=" Date filter #2" time="0.001">
+    </testcase>
+    <testcase classname=" Empty filter" name=" Empty filter" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>
