@@ -10,10 +10,13 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const chatController = require('./controllers/chatController');
 const User = require('./models/User');
 const UserDB = require('./models/Database');
+const ChatHistory = require('./models/ChatHistory');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+
+
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID || 'your_client_id_here',
@@ -57,7 +60,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -90,6 +93,7 @@ io.on('connection', (socket) => {
   socket.on('join', (username) => {
     socket.username = username;
     const users = User.addUser(username);
+    socket.emit('chat history', ChatHistory.getMessages());
     socket.broadcast.emit('user joined', username);
     io.emit('users update', users);
   });
@@ -100,6 +104,7 @@ io.on('connection', (socket) => {
       message: data.message,
       time: new Date().toLocaleTimeString()
     };
+    ChatHistory.saveMessage(message);
     io.emit('chat message', message);
   });
 

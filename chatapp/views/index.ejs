@@ -3,57 +3,139 @@
 <head>
     <title>Welcome to SWUTalk!</title>
     <style>
-        *{
+        /* <weight>: Use a value from 300 to 800*/
+        /*<uniquifier>: Use a unique and descriptive class name*/
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+Thai:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+        
+        /*
+        .open-sans-<uniquifier> {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+        }
+        */
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        body { font-family: Arial, sans-serif; max-width: 400px; margin: 100px auto; padding: 20px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+            background: url('/res/swutalk.png') no-repeat center center fixed;
+            background-size: cover;
+            width: 100%;
+            position: relative;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
         .card{
-            background-color: white;
-            border:black 2px; 
-            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border:1px solid rgba(0, 0, 0, 0.1) ; 
+            padding: 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(13px);
+            box-shadow:
+             rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+             rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
             width: 400px;
-            height: 400px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            padding:20px;
+            height: 380px;
+        }
+        .container-card{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        /*SWU TALK*/
+        .container-card h1 {
+            font-size: 36px;
+            font-family:  "Open Sans", sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #D02752;
+        }
+        /*Login*/
+        .container-card h2 {
+            font-family:  "Open Sans", sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color:#111F35;
+        }
+        /*Welcome back to SWUTalk!*/
+        .container-card p {
+            font-size: 20px;
+            font-family: "Open Sans", sans-serif;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color:#111F35;
+        }
+        .container-card a {
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
             
-            h3{
-                margin-top: 20px;
-                
-            }
-            p{
-                margin-top: 20px;
-            }
-            input{
-                margin-top: 20px;
-                border-radius: 4px;
-            }
-            button{
-                border-radius: 20px;
-                background-color: #FB7A7A;
-                margin-top:20px;
-            }
+        }
+        .container-card button {
+            justify-content: center;
+            font-size: 16px;
+            width: 300px;
+            color: white;
+            font-family: "Open Sans", sans-serif;
+            font-weight: 400;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-left: 30px;
+            text-align: center;
+            background-color: #D02752;
+            border-radius: 30px;
+            border: 2px solid #D02752; 
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        .container-card button:hover{
+            text-align: center;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.6);
+            color: #D02752;
+        }
+        .swu p{
+            font-size: 16px;
+            color: #111F35;
+            font-family: "Open Sans", sans-serif;
+            font-weight: 700;
         }
     </style>
+    
 </head>
 <body>
-    <h1 style="color: #FB7A7A;">SWUTALK</h1>
-    <div class="card">
-        <h2 style="margin-bottom: 20px">Login</h2>
-        <p>Welcome back to SWUTalk!</p>
-        <div style="margin-top: 40px; text-align: center;">
-            <a href="/auth/google" style="text-decoration: none;">
-                <button type="button" style="background-color: #4285F4; border-radius: 4px; font-weight: bold; width: 100%;">
-                    Sign in with Google (@g.swu.ac.th)
-                </button>
-            </a>
-        </div>
-        <div style="margin-top: 20px; text-align: center; color: #555;">
-            <p>Only SWU accounts are supported.</p>
+    <div class="container">
+        <div class="card">
+            <div class="container-card">
+                <h1>SWUTALK</h1>
+                <hr style="width: 80%; border: 1px solid #D02752; margin-bottom: 20px;">
+                <h2>Login</h2>
+                <p>Welcome back to SWUTalk!</p>
+                <a href="/auth/google">
+                    <button type="button">
+                        Sign in with Google (@g.swu.ac.th)
+                    </button>
+                </a>
+                <div class="swu">
+                    <p>Only SWU accounts are supported.</p>
+                </div>
+            </div>
         </div>
     </div>
-    
 </body>
 </html>

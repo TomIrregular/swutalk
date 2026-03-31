@@ -85,6 +85,48 @@ A Chatroom project for CP252
 ## Front-end Design
 ![FrontDesign](SWUTalk_Frontend_Design.png)
 
+## การทำงานของโปรเเกรม 
+1. มี GET กี่ Method?  
+ในไฟล์ app.js มีการประกาศ GET method หรือ Endpoint ทั้งหมด 7 เส้นทาง (Routes) ดังนี้:  
+app.get('/') - หน้าแรก (Index) / หน้าล็อกอิน  
+app.get('/register') - หน้าลงทะเบียนเดิม แต่ปัจจุบันถูกสั่งให้ Redirect กลับไปที่หน้าแรก (/)  
+app.get('/chat') - หน้าห้องแชทหลัก  
+app.get('/setup-profile') - หน้าสำหรับตั้งค่า Username หลังจากล็อกอินผ่าน Google สำเร็จ  
+app.get('/auth/google') - เริ่มต้นกระบวนการล็อกอินด้วย Google OAuth  
+app.get('/auth/google/callback') - เส้นทางรับ Callback หลังจาก Google ยืนยันตัวตนสำเร็จ (เพื่อตรวจสอบและทำการ Redirect ไปหน้าต่อๆ ไป)  
+app.get('/logout') - สำหรับออกจากระบบ  
+2. มี POST กี่ Method?  
+มีการประกาศ POST method ไว้ 1 เส้นทาง :  
+app.post('/setup-profile') - ใช้สำหรับบันทึกข้อมูล Profile (ตัว Username) หลังจากผู้ใช้ตั้งค่าชื่อของตัวเอง  
+3. ใช้ Template อย่างไร?  
+ระบบใช้ EJS (Embedded JavaScript) เป็น Template Engine โดยตั้งค่าดังนี้:  
+javascript  
+app.set('view engine', 'ejs');  
+app.set('views', path.join(__dirname, 'views'));  
+หมายความว่าตัวโปรเจกต์จะเรียกโฟลเดอร์ views/ เพื่อดึงไฟล์ .ejs มาแสดงผล  
+การส่งข้อมูลจากฝั่ง Server ไปยังผู้ใช้ เวลาแสดงหน้าตาเว็บไซต์ต่างๆ จะใช้การ Render ไฟล์ EJS (เช่น index.ejs, chat.ejs) ร่วมกับข้อมูลต่างๆ ส่งไปแสดงที่ฝั่ง Client 
+4. มีการเรียก API หรือไม่อย่างไร?  
+Third-party API: มีการเรียกใช้ Google OAuth 2.0 API ผ่านไลบรารี passport-google-oauth20 เพื่อทำระบบ Login ด้วย Google ซึ่งจะคอยดึงข้อมูล Profile ของผู้ใช้มา (อย่างเช่น Email และ ID) และระบบมีการดักกรองว่าจะยอมให้เข้าใช้งานได้ก็ต่อเมื่ออีเมลนั้นลงท้ายด้วย @g.swu.ac.th เท่านั้น  
+WebSocket (Real-time API): มีการใช้ Socket.io เปิดช่องทางสื่อสาร 2 ทาง (Two-way communication) สำหรับแชทแบบ Real-time เช่น ส่งอีเวนต์ join, chat message, disconnect เป็นต้น  
+5. มีการคำนวณหรือประมวลผลอะไรบ้าง?  
+ระบบไม่ได้มีการคำนวณทางคณิตศาสตร์ที่ซับซ้อน แต่มีกระบวนการประมวลผลโลจิกการจัดการแชท ดังนี้: 
+String Matching & Validation: ตอน Login ด้วย Google จะมีการตรวจสอบ String อีเมลว่าลงท้ายด้วย @g.swu.ac.th หรือไม่  
+Session & Routing Logic: ระบบมีการประมวลผลเช็คว่า User มี Username แล้วหรือยัง ถ้ายังไม่มีจะ Redirect ไปบังคับกรอกที่หน้า /setup-profile  
+Time Formatting: เมื่อมีแชทถูกส่งเข้ามา จะมีการประมวลผลสร้างเวลา ณ ตอนนั้น โดยใช้ new Date().toLocaleTimeString() เพื่อแนบเวลาไปกับข้อความที่ส่ง  
+Managing Arrays/Objects: มีการจัดการ List ผู้ใช้ออนไลน์ เช่นการเอาชื่อใส่ (User.addUser) และเอาชื่อออก (User.removeUser) เมื่อผู้ใช้คนนั้นหลุดการเชื่อมต่อ  แล้วค่อยส่งรายชื่อแจ้งทุกคนในห้อง  
+
+## Test case
+![Test coverage report](picture/test1.png)  
+![Test data structure](picture/test2.png)  
+
+## Bug เเละ ปัญหาที่ถูกพบ  
+1. ในตอนค้นหายังไม่รองรับการ search มากกว่า 1 filer (เช่น username เเละ date พร้อมๆกัน)  
+
+## หน้า Website
+![Login](picture/login.png)  
+![CompleteProfile](picture/CompleteProfile.png)  
+![chatroom](picture/chatroom.png)  
+
 ## สรุป Requriement   
 คลิปวิดีโอ : https://www.youtube.com/watch?v=rnKZ1QF17bc  
 สิ่งที่ได้จากการเก็บ requirement :  
