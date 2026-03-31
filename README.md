@@ -127,6 +127,10 @@ Managing Arrays/Objects: มีการจัดการ List ผู้ใช�
 ![CompleteProfile](picture/CompleteProfile.png)  
 ![chatroom](picture/chatroom.png)  
 
+## สิ่งที่เปลี่ยนเเปลงจาก sprint1 เเละ 2  
+1. ปรับลด function ให้เหมาะกับ requirement ที่อาจารย์ขอ  
+2. ปรับ UI ให้เหมาะกับ function ใหม่ที่ได้รับ  
+
 ## สรุป Requriement   
 คลิปวิดีโอ : https://www.youtube.com/watch?v=rnKZ1QF17bc  
 สิ่งที่ได้จากการเก็บ requirement :  
