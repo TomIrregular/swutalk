@@ -12,7 +12,7 @@ class ChatHistoryDB {
   getMessages() {
     try {
       const data = fs.readFileSync(historyFilePath, 'utf8');
-      const messages = JSON.parse(data);
+      const messages = JSON.parse(data || '[]');
       // Return only the latest 100 messages
       return messages.slice(-100);
     } catch (err) {
@@ -25,7 +25,7 @@ class ChatHistoryDB {
     try {
       // We read the full history to append
       const data = fs.readFileSync(historyFilePath, 'utf8');
-      const messages = JSON.parse(data);
+      const messages = JSON.parse(data || '[]');
       
       messages.push(messageData);
       
