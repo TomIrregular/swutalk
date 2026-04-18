@@ -4,7 +4,10 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest"
+    "test": "jest",
+    "plato": "plato -d report controllers models public app.js",
+    "performance": "clinic doctor --dest report -- node app.js",
+    "loadtest": "autocannon -c 10 -d 10 http://localhost:3000/ --json > report/loadtest.json"
   },
   "jest": {
     "collectCoverage": true,
@@ -34,8 +37,11 @@
     "socket.io": "^4.7.2"
   },
   "devDependencies": {
+    "autocannon": "^8.0.0",
+    "clinic": "^13.0.0",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
-    "jest-junit": "^16.0.0"
+    "jest-junit": "^16.0.0",
+    "plato": "^1.7.0"
   }
 }
