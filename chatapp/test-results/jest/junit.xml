@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.102">
-  <testsuite name="UI Testcases" errors="0" failures="0" skipped="0" timestamp="2026-04-20T03:50:06" time="0.371" tests="5">
-    <testcase classname="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" name="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" time="0.008">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="0.691">
+  <testsuite name="UI Testcases" errors="0" failures="0" skipped="0" timestamp="2026-04-20T04:19:35" time="0.162" tests="5">
+    <testcase classname="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" name="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" time="0.006">
     </testcase>
     <testcase classname="UI Testcases Testcase 2: Message form submission should prevent default behavior" name="UI Testcases Testcase 2: Message form submission should prevent default behavior" time="0.004">
     </testcase>
-    <testcase classname="UI Testcases Testcase 3: System message UI generation is formatted correctly" name="UI Testcases Testcase 3: System message UI generation is formatted correctly" time="0.003">
+    <testcase classname="UI Testcases Testcase 3: System message UI generation is formatted correctly" name="UI Testcases Testcase 3: System message UI generation is formatted correctly" time="0.004">
     </testcase>
-    <testcase classname="UI Testcases Testcase 4: User chat message (Self) alignment and classes" name="UI Testcases Testcase 4: User chat message (Self) alignment and classes" time="0">
+    <testcase classname="UI Testcases Testcase 4: User chat message (Self) alignment and classes" name="UI Testcases Testcase 4: User chat message (Self) alignment and classes" time="0.001">
     </testcase>
     <testcase classname="UI Testcases Testcase 5: User chat message (Other) alignment and classes" name="UI Testcases Testcase 5: User chat message (Other) alignment and classes" time="0.001">
     </testcase>
