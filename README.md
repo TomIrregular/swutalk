@@ -120,6 +120,24 @@ Managing Arrays/Objects: มีการจัดการ List ผู้ใช�
 ![Test coverage report](picture/test1.png)  
 ![Test data structure](picture/test2.png)  
 
+## CI/CD Pipeline
+1. วัตถุประสงค์ของการทำ CI (Objective) อธิบายว่าเราสร้าง Pipeline   นี้ขึ้นมาเพื่อ "ควบคุมคุณภาพของระบบแบบอัตโนมัติ"  ทุกครั้งที่มีคนเขียนโค้ดเพิ่มหรือแก้ไข (Push/Pull Request) ระบบจะต้องตรวจสอบความถูกต้องและประสิทธิภาพทันที เพื่อป้องกันไม่ให้โค้ดที่พังหรือไม่ได้มาตรฐานหลุดเข้าไปในระบบจริง
+
+2. เครื่องมือที่เลือกใช้ (Tools & Technologies)  
+CI Server: เลือกใช้ GitHub Actions เพราะเป็นบริการที่เชื่อมต่อกับ Repository ของเราโดยตรง และมี Free Tier ที่ให้ทรัพยากรดีเยี่ยม (โดยเฉพาะการรองรับ Parallel Jobs สำหรับโปรเจกต์ Open Source / Public Repo)  
+Testing: ใช้ Jest สำหรับตรวจ Unit Test และ UI Test  
+Static Profiling: ใช้ Plato สำหรับวิเคราะห์ความซับซ้อนของโค้ด (Cyclomatic Complexity)  
+Dynamic Profiling: ใช้ Autocannon สำหรับทดสอบรับโหลด (Load Testing)  
+3. เงื่อนไขการทำงาน (Pipeline Triggers) เราเขียนสคริปต์ (.github/  workflows/UnitTest.yml) ให้ Pipeline ทำงานใน 3 กรณี:  
+เมื่อมีการ Push โค้ดเข้า branch main  
+เมื่อมีการเปิด Pull Request เพื่อนำโค้ดมารวมกับ main  
+เปิดให้กดรันแบบ Manual ได้เองผ่านเมนู Actions (workflow_dispatch)  
+4. สถาปัตยกรรมการรันแบบขนาน (Parallel Jobs Architecture)  (ตรงนี้คือจุดเด่นที่คุณใช้พรีเซนต์ได้เลยครับ) อธิบายว่า  เพื่อลดระยะเวลาในการรอผลเทส เราได้ออกแบบให้ GitHub Actions  แตกงานออกเป็น 3 งานย่อยที่รันไปพร้อมๆกัน(Parallel Execution): 
+
+Job: Run Tests: มีหน้าที่ติดตั้ง Node.js ติดตั้ง Dependencies และรันคำสั่ง npm test เพื่อตรวจสอบโค้ดด้วย Jest ว่าทำงานถูกต้องตาม Testcases ที่กำหนดไว้หรือไม่ (ทั้ง Logic และ UI)  
+Job: Static Profiling: มีหน้าที่นำโค้ดมารันสคริปต์ npm run plato เพื่อสร้างรายงาน Static Analysis เช็คหาจุดที่โค้ดเขียนซับซ้อนเกินไป หรือยากต่อการดูแลรักษา (Maintainability)
+Job: Dynamic Profiling: เครื่องนี้จะทำการจำลองเป็นเซิร์ฟเวอร์จริง โดยรันคำสั่ง npm start เอาไว้เป็น Background Process จากนั้นรันคำสั่ง npm run loadtest (Autocannon) เพื่อจำลองคนยิง Request เข้ามาจำนวนมาก เพื่อตรวจสอบว่าแอปพลิเคชันยังตอบสนองได้เร็วและไม่ล่ม  
+
 ## Bug เเละ ปัญหาที่ถูกพบ  
 1. ในตอนค้นหาเนื่องจากใช้ if else ทำให้ถ้าเกิดว่า user search keyword เเบบไม่เรียงลำดับ จะทำให้ search ไม่ขึ้น  
 
