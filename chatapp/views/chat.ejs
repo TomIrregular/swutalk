@@ -95,6 +95,47 @@
             box-shadow: 0 0 0 2px rgba(208, 39, 82, 0.15);
         }
 
+        /* Search Suggestions Dropdown */
+        .search-suggestions {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .search-suggestions.show {
+            display: flex;
+        }
+
+        .suggestion-item {
+            padding: 10px 14px;
+            font-family: "Open Sans", sans-serif;
+            font-size: 0.85rem;
+            color: #111F35;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background: rgba(208, 39, 82, 0.1);
+            color: #D02752;
+        }
+
         /* User list (lazy scroll) */
         #usersList {
             flex: 1;
@@ -473,7 +514,13 @@
                     </svg>
                 </span>
             </div>
-            <input id="searchInput" type="text" placeholder="search . . ." />
+            <div style="position: relative; width: 100%; margin-bottom: 14px;">
+                <input id="searchInput" type="text" placeholder="search . . ." style="margin-bottom: 0;" />
+                <div id="searchSuggestions" class="search-suggestions">
+                    <div class="suggestion-item" data-val='"@'>Search for user: "@username"</div>
+                    <div class="suggestion-item" data-val='"date:'>Search by date: "date:dd/mm/yyyy"</div>
+                </div>
+            </div>
             <div id="usersList"></div>
         </div>
 
@@ -523,7 +570,24 @@
 
         // ── Helper: create a message element ──
         function createMessageElement(data) {
+            const now = new Date();
             const isSelf = data.username === username;
+            
+            let dateVal = '';
+            let timeVal = '';
+            if (data.time) {
+                if (data.time.includes(',')) {
+                    const parts = data.time.split(', ');
+                    dateVal = parts[0];
+                    timeVal = parts[1];
+                } else {
+                    timeVal = data.time;
+                    dateVal = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+                }
+            } else {
+                timeVal = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                dateVal = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+            }
 
             // Store as last message
             lastMessages[data.username] = data.message;
@@ -532,25 +596,15 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message ' + (isSelf ? 'self' : 'other');
 
-            if (isSelf) {
-                messageDiv.innerHTML = `
-                    <div class="msg-avatar">${userAvatarSVG}</div>
-                    <div class="msg-content">
-                        <span class="msg-username">${data.username}</span>
-                        <div class="msg-bubble"><span class="body">${data.message}</span></div>
-                        <span class="msg-time time">${data.time || ''}</span>
-                    </div>
-                `;
-            } else {
-                messageDiv.innerHTML = `
-                    <div class="msg-avatar">${userAvatarSVG}</div>
-                    <div class="msg-content">
-                        <span class="msg-username">${data.username}</span>
-                        <div class="msg-bubble"><span class="body">${data.message}</span></div>
-                        <span class="msg-time time">${data.time || ''}</span>
-                    </div>
-                `;
-            }
+            messageDiv.innerHTML = `
+                <div class="msg-avatar">${userAvatarSVG}</div>
+                <div class="msg-content">
+                    <span class="msg-username">${data.username}</span>
+                    <div class="msg-bubble"><span class="body">${data.message}</span></div>
+                    <span class="msg-time time">${timeVal}</span>
+                    <span class="msg-date date" style="display:none">${dateVal}</span>
+                </div>
+            `;
 
             return messageDiv;
         }
@@ -573,41 +627,68 @@
         });
 
         // ── Search listener ──
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        
+        function showSearchSuggestions(rawSearch) {
+            const quotes = (rawSearch.match(/"/g) || []).length;
+            if (quotes % 2 !== 0 && (!rawSearch.includes('"@') && !rawSearch.includes('"date:'))) {
+                searchSuggestions.classList.add('show');
+            } else {
+                searchSuggestions.classList.remove('show');
+            }
+        }
+
         searchInput.addEventListener('input', (e) => {
-            const searchKey = e.target.value.toLowerCase();
+            const rawSearch = e.target.value.toLowerCase();
+            
+            const userMatch = rawSearch.match(/"@([^"]+)"/);
+            const dateMatch = rawSearch.match(/"date:([^"]+)"/);
+            
+            let textSearch = rawSearch.replace(/"@[^"]*"?/g, '').replace(/"date:[^"]*"?/g, '').trim();
+            const targetUser = userMatch ? userMatch[1].toLowerCase() : null;
+            const targetDate = dateMatch ? dateMatch[1].toLowerCase() : null;
+            
             const allMessages = messages.getElementsByClassName('message');
 
             Array.from(allMessages).forEach((msg) => {
-                const usernameEl = msg.querySelector('.msg-username');
-                const bodyEl = msg.querySelector('.body');
-                const timeEl = msg.querySelector('.time');
-
-                if (!usernameEl && !bodyEl) {
-                    // System message
-                    const text = msg.textContent.toLowerCase();
-                    msg.style.display = text.includes(searchKey) ? 'flex' : 'none';
+                if (msg.classList.contains('system')) {
+                    msg.style.display = msg.textContent.toLowerCase().includes(rawSearch) ? 'flex' : 'none';
                     return;
                 }
+                const usernameText = msg.querySelector('.msg-username')?.textContent.toLowerCase() || '';
+                const messageText = msg.querySelector('.body')?.textContent.toLowerCase() || '';
+                const dateText = msg.querySelector('.msg-date')?.textContent.toLowerCase() || '';
 
-                const usernameText = usernameEl ? usernameEl.textContent.toLowerCase() : '';
-                const messageText = bodyEl ? bodyEl.textContent.toLowerCase() : '';
-                const dateText = timeEl ? timeEl.textContent.toLowerCase() : '';
-                let textChecker = false;
+                const matchesUser = !targetUser || usernameText.includes(targetUser);
+                const matchesDate = !targetDate || dateText.includes(targetDate);
+                const matchesText = !textSearch || messageText.includes(textSearch);
 
-                if (searchKey.startsWith('"@') && searchKey.endsWith('"')) {
-                    const targetUser = searchKey.slice(2, -1);
-                    textChecker = usernameText.includes(targetUser);
-                }
-                else if (searchKey.startsWith('"date:') && searchKey.endsWith('"')) {
-                    const targetDate = searchKey.slice(6, -1);
-                    textChecker = dateText.includes(targetDate);
-                }
-                else {
-                    textChecker = messageText.includes(searchKey) || usernameText.includes(searchKey);
-                }
-
-                msg.style.display = textChecker ? 'flex' : 'none';
+                msg.style.display = (matchesUser && matchesDate && matchesText) ? 'flex' : 'none';
             });
+            showSearchSuggestions(rawSearch);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target !== searchInput && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.remove('show');
+            }
+        });
+
+        searchSuggestions.addEventListener('click', (e) => {
+            const suggestion = e.target.closest('.suggestion-item');
+            if (suggestion) {
+                const keyword = suggestion.getAttribute('data-val');
+                const currentVal = searchInput.value;
+                const lastQuoteIdx = currentVal.lastIndexOf('"');
+                if (lastQuoteIdx !== -1) {
+                    searchInput.value = currentVal.substring(0, lastQuoteIdx) + keyword;
+                } else {
+                    searchInput.value += keyword;
+                }
+                searchSuggestions.classList.remove('show');
+                searchInput.focus();
+                searchInput.dispatchEvent(new Event('input'));
+            }
         });
 
         // ── Chat history ──
