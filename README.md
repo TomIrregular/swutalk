@@ -134,9 +134,9 @@ Dynamic Profiling: ใช้ Autocannon สำหรับทดสอบรั�
 เปิดให้กดรันแบบ Manual ได้เองผ่านเมนู Actions (workflow_dispatch)  
 4. สถาปัตยกรรมการรันแบบขนาน (Parallel Jobs Architecture)  (ตรงนี้คือจุดเด่นที่คุณใช้พรีเซนต์ได้เลยครับ) อธิบายว่า  เพื่อลดระยะเวลาในการรอผลเทส เราได้ออกแบบให้ GitHub Actions  แตกงานออกเป็น 3 งานย่อยที่รันไปพร้อมๆกัน(Parallel Execution): 
 
-  4.1 Job: Run Tests: มีหน้าที่ติดตั้ง Node.js ติดตั้ง Dependencies และรันคำสั่ง npm test เพื่อตรวจสอบโค้ดด้วย Jest ว่าทำงานถูกต้องตาม Testcases ที่กำหนดไว้หรือไม่ (ทั้ง Logic และ UI)  
-  4.2 Job: Static Profiling: มีหน้าที่นำโค้ดมารันสคริปต์ npm run plato เพื่อสร้างรายงาน Static Analysis เช็คหาจุดที่โค้ดเขียนซับซ้อนเกินไป หรือยากต่อการดูแลรักษา (Maintainability)
-  4.3 Job: Dynamic Profiling: เครื่องนี้จะทำการจำลองเป็นเซิร์ฟเวอร์จริง โดยรันคำสั่ง npm start เอาไว้เป็น Background Process จากนั้นรันคำสั่ง npm run loadtest (Autocannon) เพื่อจำลองคนยิง Request เข้ามาจำนวนมาก เพื่อตรวจสอบว่าแอปพลิเคชันยังตอบสนองได้เร็วและไม่ล่ม  
+    4.1 Job: Run Tests: มีหน้าที่ติดตั้ง Node.js ติดตั้ง Dependencies และรันคำสั่ง npm test เพื่อตรวจสอบโค้ดด้วย Jest ว่าทำงานถูกต้องตาม Testcases ที่กำหนดไว้หรือไม่ (ทั้ง Logic และ UI)  
+    4.2 Job: Static Profiling: มีหน้าที่นำโค้ดมารันสคริปต์ npm run plato เพื่อสร้างรายงาน Static Analysis เช็คหาจุดที่โค้ดเขียนซับซ้อนเกินไป หรือยากต่อการดูแลรักษา (Maintainability)  
+  4.3 Job: Dynamic Profiling: เครื่องนี้จะทำการจำลองเป็นเซิร์ฟเวอร์จริง โดยรันคำสั่ง npm start เอาไว้เป็น Background Process จากนั้นรันคำสั่ง npm run loadtest (Autocannon) เพื่อจำลองคนยิง Request เข้ามาจำนวนมาก   เพื่อตรวจสอบว่าแอปพลิเคชันยังตอบสนองได้เร็วและไม่ล่ม  
 
 ## Bug เเละ ปัญหาที่ถูกพบ  
 1. ในตอนค้นหาเนื่องจากใช้ if else ทำให้ถ้าเกิดว่า user search keyword เเบบไม่เรียงลำดับ จะทำให้ search ไม่ขึ้น  
