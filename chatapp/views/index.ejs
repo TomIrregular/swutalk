@@ -122,11 +122,24 @@
                 <hr style="width: 80%; border: 1px solid #D02752; margin-bottom: 20px;">
                 <h2>Login</h2>
                 <p>Welcome back to SWUTalk!</p>
-                <a href="/auth/google">
+                <a href="#" id="loginBtn" style="margin-bottom: 10px;">
                     <button type="button">
                         Sign in with Google (@g.swu.ac.th)
                     </button>
                 </a>
+                <div style="margin-bottom: 20px; font-family: 'Open Sans', sans-serif; color: #555; font-size: 13px;">
+                    <label style="cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <input type="checkbox" id="rememberMe" checked style="accent-color: #D02752; cursor: pointer; width: 14px; height: 14px;">
+                        <span style="user-select: none;">Remember me</span>
+                    </label>
+                </div>
+                <script>
+                    document.getElementById('loginBtn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const remember = document.getElementById('rememberMe').checked;
+                        window.location.href = '/auth/google?remember=' + remember;
+                    });
+                </script>
                 <div class="swu">
                     <p>Only SWU accounts are supported.</p>
                 </div>

@@ -70,7 +70,13 @@ app.get('/chat', chatController.chat);
 app.get('/setup-profile', chatController.setupProfile);
 app.post('/setup-profile', chatController.saveProfile);
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google', (req, res, next) => {
+  const options = { scope: ['profile', 'email'] };
+  if (req.query.remember === 'false') {
+    options.prompt = 'select_account';
+  }
+  passport.authenticate('google', options)(req, res, next);
+});
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/?error=invalid_email' }),
@@ -102,7 +108,7 @@ io.on('connection', (socket) => {
     const message = {
       username: socket.username,
       message: data.message,
-      time: new Date().toLocaleTimeString()
+      time: new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
     ChatHistory.saveMessage(message);
     io.emit('chat message', message);
