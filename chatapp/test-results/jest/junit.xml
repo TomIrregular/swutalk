@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="11" failures="0" errors="0" time="1.07">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-03-31T07:04:48" time="0.293" tests="11">
-    <testcase classname=" Simple filter #1" name=" Simple filter #1" time="0.014">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="1.102">
+  <testsuite name="UI Testcases" errors="0" failures="0" skipped="0" timestamp="2026-04-20T03:50:06" time="0.371" tests="5">
+    <testcase classname="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" name="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" time="0.008">
     </testcase>
-    <testcase classname=" Simple filter #2" name=" Simple filter #2" time="0.002">
+    <testcase classname="UI Testcases Testcase 2: Message form submission should prevent default behavior" name="UI Testcases Testcase 2: Message form submission should prevent default behavior" time="0.004">
     </testcase>
-    <testcase classname=" Simple filter #3" name=" Simple filter #3" time="0.002">
+    <testcase classname="UI Testcases Testcase 3: System message UI generation is formatted correctly" name="UI Testcases Testcase 3: System message UI generation is formatted correctly" time="0.003">
     </testcase>
-    <testcase classname=" Simple filter #4" name=" Simple filter #4" time="0.001">
+    <testcase classname="UI Testcases Testcase 4: User chat message (Self) alignment and classes" name="UI Testcases Testcase 4: User chat message (Self) alignment and classes" time="0">
     </testcase>
-    <testcase classname=" Simple filter #5" name=" Simple filter #5" time="0.003">
-    </testcase>
-    <testcase classname=" User filter #1" name=" User filter #1" time="0.001">
-    </testcase>
-    <testcase classname=" User filter #2" name=" User filter #2" time="0.001">
-    </testcase>
-    <testcase classname=" User filter #3" name=" User filter #3" time="0.002">
-    </testcase>
-    <testcase classname=" Date filter #1" name=" Date filter #1" time="0.001">
-    </testcase>
-    <testcase classname=" Date filter #2" name=" Date filter #2" time="0.001">
-    </testcase>
-    <testcase classname=" Empty filter" name=" Empty filter" time="0.001">
+    <testcase classname="UI Testcases Testcase 5: User chat message (Other) alignment and classes" name="UI Testcases Testcase 5: User chat message (Other) alignment and classes" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
