@@ -1,38 +1,70 @@
-name: NodeJS with jest test
-
-#on:
-#  push:
-#    branches: [ "main" ]
-#  pull_request:
-#    branches: [ "main" ]
+name: SWUTalk CI Pipeline
 
 on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch: 
 
 jobs:
-  build:
+  # Job 1: รัน Unit Test & UI Test
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [24.x]
-        
     steps:
     - uses: actions/checkout@v4
-
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 20.x
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-      
-    - name: Build
-      run: | 
-        cd chatapp
-        cd test
-        npm install
-        
-    - name: Test
+        node-version: 20.x
+    - name: Install dependencies
       run: |
         cd chatapp
-        cd test
-        npm run test
+        npm install
+    - name: Run Jest Tests
+      run: |
+        cd chatapp
+        npm test
+
+  # Job 2: รัน Static Analysis (Plato) แบบขนานไปกับ Job 1
+  static-analysis:
+    name: Static Profiling (Plato)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+    - name: Install dependencies
+      run: |
+        cd chatapp
+        npm install
+    - name: Run Plato Profiling
+      run: |
+        cd chatapp
+        npm run plato
+
+  # Job 3: รัน Load Testing (Autocannon) แบบขนาน
+  load-test:
+    name: Dynamic Profiling (Autocannon)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+    - name: Install dependencies
+      run: |
+        cd chatapp
+        npm install
+    - name: Run Load Test
+      run: |
+        cd chatapp
+        # Start server in background
+        npm start &
+        sleep 3
+        # Run autocannon
+        npm run loadtest
