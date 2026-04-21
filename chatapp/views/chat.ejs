@@ -601,6 +601,7 @@
                 <div class="msg-content">
                     <span class="msg-username">${data.username}</span>
                     <div class="msg-bubble"><span class="body">${data.message}</span></div>
+                    <span class="msg-date" style="display:none;">${dateVal}</span>
                     <span class="msg-time time">${dateVal} ${timeVal}</span>
                 </div>
             `;
@@ -629,13 +630,18 @@
         const searchSuggestions = document.getElementById('searchSuggestions');
         
         function showSearchSuggestions(rawSearch) {
-            const quotes = (rawSearch.match(/"/g) || []).length;
-            if (quotes % 2 !== 0 && (!rawSearch.includes('"@') && !rawSearch.includes('"date:'))) {
-                searchSuggestions.classList.add('show');
-            } else {
+            // Hide suggestions only when a complete keyword is already typed
+            const hasCompleteKeyword = rawSearch.includes('"@') || rawSearch.includes('"date:');
+            if (hasCompleteKeyword) {
                 searchSuggestions.classList.remove('show');
             }
+            // Otherwise keep whatever state it's currently in (shown on focus)
         }
+
+        // Show suggestions immediately on focus
+        searchInput.addEventListener('focus', () => {
+            searchSuggestions.classList.add('show');
+        });
 
         searchInput.addEventListener('input', (e) => {
             const rawSearch = e.target.value.toLowerCase();
