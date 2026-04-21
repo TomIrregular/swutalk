@@ -138,16 +138,17 @@ Dynamic Profiling: ใช้ Autocannon สำหรับทดสอบรั�
   4.3 Job: Dynamic Profiling: เครื่องนี้จะทำการจำลองเป็นเซิร์ฟเวอร์จริง โดยรันคำสั่ง npm start เอาไว้เป็น Background Process จากนั้นรันคำสั่ง npm run loadtest (Autocannon) เพื่อจำลองคนยิง Request เข้ามาจำนวนมาก   เพื่อตรวจสอบว่าแอปพลิเคชันยังตอบสนองได้เร็วและไม่ล่ม  
 
 ## Bug เเละ ปัญหาที่ถูกพบ  
-1. ในตอนค้นหาเนื่องจากใช้ if else ทำให้ถ้าเกิดว่า user search keyword เเบบไม่เรียงลำดับ จะทำให้ search ไม่ขึ้น  
+ยังไม่พบบัคในเวอร์ชั่นล่าสุด  
 
 ## หน้า Website
 ![Login](picture/login.png)  
 ![CompleteProfile](picture/CompleteProfile.png)  
 ![chatroom](picture/chatroom.png)  
 
-## สิ่งที่เปลี่ยนเเปลงจาก sprint1 เเละ 2  
+## สิ่งที่เปลี่ยนเเปลงจาก sprint1 sprint2 และ sprint3  
 1. ปรับลด function ให้เหมาะกับ requirement ที่อาจารย์ขอ  
-2. ปรับ UI ให้เหมาะกับ function ใหม่ที่ได้รับ  
+2. ปรับ UI ให้เหมาะกับ function ใหม่ที่ได้รับ
+3. แก้บัคทุกตัวที่พบ เปลี่ยน logic ของโค้ดให้เหมาะสม   
 
 ## สรุป Requriement   
 คลิปวิดีโอ : https://www.youtube.com/watch?v=rnKZ1QF17bc  
