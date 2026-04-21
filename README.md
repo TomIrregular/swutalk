@@ -117,8 +117,7 @@ Time Formatting: เมื่อมีแชทถูกส่งเข้าม
 Managing Arrays/Objects: มีการจัดการ List ผู้ใช้ออนไลน์ เช่นการเอาชื่อใส่ (User.addUser) และเอาชื่อออก (User.removeUser) เมื่อผู้ใช้คนนั้นหลุดการเชื่อมต่อ  แล้วค่อยส่งรายชื่อแจ้งทุกคนในห้อง  
 
 ## Test case
-![Test coverage report](picture/test1.png)  
-![Test data structure](picture/test2.png)  
+![Test coverage report](picture/test3.png)  
 
 ## CI/CD Pipeline
 1. วัตถุประสงค์ของการทำ CI (Objective) อธิบายว่าเราสร้าง Pipeline   นี้ขึ้นมาเพื่อ "ควบคุมคุณภาพของระบบแบบอัตโนมัติ"  ทุกครั้งที่มีคนเขียนโค้ดเพิ่มหรือแก้ไข (Push/Pull Request) ระบบจะต้องตรวจสอบความถูกต้องและประสิทธิภาพทันที เพื่อป้องกันไม่ให้โค้ดที่พังหรือไม่ได้มาตรฐานหลุดเข้าไปในระบบจริง
