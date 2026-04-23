@@ -65,16 +65,12 @@ jobs:
       run: |
         cd chatapp
         npm install
-    - name: Run Load Test
+    - name: Run Load Test with Clinic.js
       run: |
         cd chatapp
-        # Start server in background
-        npm start &
-        sleep 3
-        # Run autocannon for multiple routes
-        npm run loadtest:routes
-    - name: Upload Autocannon Report
+        npm run performance
+    - name: Upload Performance Reports
       uses: actions/upload-artifact@v4
       with:
-        name: autocannon-reports
-        path: chatapp/report/*.json
+        name: performance-reports
+        path: chatapp/report/
