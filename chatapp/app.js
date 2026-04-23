@@ -21,7 +21,7 @@ const io = socketIo(server);
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID || 'your_client_id_here',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'your_client_secret_here',
-    callbackURL: 'http://localhost:3000/auth/google/callback'
+    callbackURL: process.env.CALLBACK_URL || 'http://localhost:3000/auth/google/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
     const email = profile.emails && profile.emails[0].value;

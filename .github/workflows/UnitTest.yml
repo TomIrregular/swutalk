@@ -79,8 +79,8 @@ jobs:
   deploy:
     name: Deploy to Render
     runs-on: ubuntu-latest
-    needs: [test, static-analysis, load-test]  # รอให้ CI ผ่านก่อนทุก Job
-    if: github.ref == 'refs/heads/main'  # Deploy เฉพาะ push to main
+    needs: [test, static-analysis, load-test] 
+    if: github.ref == 'refs/heads/main'  
     steps:
     - name: Trigger Render Deploy
       run: |
