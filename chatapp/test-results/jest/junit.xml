@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="24" failures="0" errors="0" time="0.885">
-  <testsuite name="Chat Search Logic" errors="0" failures="0" skipped="0" timestamp="2026-04-20T08:35:19" time="0.381" tests="19">
-    <testcase classname="Chat Search Logic Simple filter #1" name="Chat Search Logic Simple filter #1" time="0.172">
+<testsuites name="jest tests" tests="24" failures="0" errors="0" time="37.112">
+  <testsuite name="UI Testcases" errors="0" failures="0" skipped="0" timestamp="2026-04-23T08:32:44" time="7.586" tests="5">
+    <testcase classname="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" name="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" time="0.02">
     </testcase>
-    <testcase classname="Chat Search Logic Simple filter #2" name="Chat Search Logic Simple filter #2" time="0.006">
+    <testcase classname="UI Testcases Testcase 2: Message form submission should prevent default behavior" name="UI Testcases Testcase 2: Message form submission should prevent default behavior" time="0.017">
     </testcase>
-    <testcase classname="Chat Search Logic Simple filter #3" name="Chat Search Logic Simple filter #3" time="0.005">
+    <testcase classname="UI Testcases Testcase 3: System message UI generation is formatted correctly" name="UI Testcases Testcase 3: System message UI generation is formatted correctly" time="0.009">
     </testcase>
-    <testcase classname="Chat Search Logic Simple filter #4" name="Chat Search Logic Simple filter #4" time="0.004">
+    <testcase classname="UI Testcases Testcase 4: User chat message (Self) alignment and classes" name="UI Testcases Testcase 4: User chat message (Self) alignment and classes" time="0.002">
     </testcase>
-    <testcase classname="Chat Search Logic Simple filter #5" name="Chat Search Logic Simple filter #5" time="0.004">
-    </testcase>
-    <testcase classname="Chat Search Logic User filter #1" name="Chat Search Logic User filter #1" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic User filter #2" name="Chat Search Logic User filter #2" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic User filter #3" name="Chat Search Logic User filter #3" time="0.006">
-    </testcase>
-    <testcase classname="Chat Search Logic Date filter #1" name="Chat Search Logic Date filter #1" time="0.005">
-    </testcase>
-    <testcase classname="Chat Search Logic Date filter #2" name="Chat Search Logic Date filter #2" time="0.007">
-    </testcase>
-    <testcase classname="Chat Search Logic Combination filter #1" name="Chat Search Logic Combination filter #1" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic Combination filter #2" name="Chat Search Logic Combination filter #2" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic Empty filter" name="Chat Search Logic Empty filter" time="0.004">
-    </testcase>
-    <testcase classname="Chat Search Logic System filter: matches joined/left messages" name="Chat Search Logic System filter: matches joined/left messages" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic Search suggestions show on opening quote" name="Chat Search Logic Search suggestions show on opening quote" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic Clicking a suggestion replaces the last quote" name="Chat Search Logic Clicking a suggestion replaces the last quote" time="0.005">
-    </testcase>
-    <testcase classname="Chat Search Logic Clicking a suggestion appends keyword if no quote found" name="Chat Search Logic Clicking a suggestion appends keyword if no quote found" time="0.003">
-    </testcase>
-    <testcase classname="Chat Search Logic Edge Case: Defensive guards and missing elements" name="Chat Search Logic Edge Case: Defensive guards and missing elements" time="0.004">
-    </testcase>
-    <testcase classname="Chat Search Logic Edge Case: Clicking outside a suggestion item" name="Chat Search Logic Edge Case: Clicking outside a suggestion item" time="0.003">
+    <testcase classname="UI Testcases Testcase 5: User chat message (Other) alignment and classes" name="UI Testcases Testcase 5: User chat message (Other) alignment and classes" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="UI Testcases" errors="0" failures="0" skipped="0" timestamp="2026-04-20T08:35:19" time="0.035" tests="5">
-    <testcase classname="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" name="UI Testcases Testcase 1: Checkbox &quot;Remember me&quot; initial state and toggle" time="0.001">
+  <testsuite name="Chat Search Logic" errors="0" failures="0" skipped="0" timestamp="2026-04-23T08:32:44" time="9.174" tests="19">
+    <testcase classname="Chat Search Logic Simple filter #1" name="Chat Search Logic Simple filter #1" time="1.44">
     </testcase>
-    <testcase classname="UI Testcases Testcase 2: Message form submission should prevent default behavior" name="UI Testcases Testcase 2: Message form submission should prevent default behavior" time="0.002">
+    <testcase classname="Chat Search Logic Simple filter #2" name="Chat Search Logic Simple filter #2" time="0.015">
     </testcase>
-    <testcase classname="UI Testcases Testcase 3: System message UI generation is formatted correctly" name="UI Testcases Testcase 3: System message UI generation is formatted correctly" time="0.002">
+    <testcase classname="Chat Search Logic Simple filter #3" name="Chat Search Logic Simple filter #3" time="0.011">
     </testcase>
-    <testcase classname="UI Testcases Testcase 4: User chat message (Self) alignment and classes" name="UI Testcases Testcase 4: User chat message (Self) alignment and classes" time="0.001">
+    <testcase classname="Chat Search Logic Simple filter #4" name="Chat Search Logic Simple filter #4" time="0.011">
     </testcase>
-    <testcase classname="UI Testcases Testcase 5: User chat message (Other) alignment and classes" name="UI Testcases Testcase 5: User chat message (Other) alignment and classes" time="0">
+    <testcase classname="Chat Search Logic Simple filter #5" name="Chat Search Logic Simple filter #5" time="0.008">
+    </testcase>
+    <testcase classname="Chat Search Logic User filter #1" name="Chat Search Logic User filter #1" time="0.013">
+    </testcase>
+    <testcase classname="Chat Search Logic User filter #2" name="Chat Search Logic User filter #2" time="0.007">
+    </testcase>
+    <testcase classname="Chat Search Logic User filter #3" name="Chat Search Logic User filter #3" time="0.009">
+    </testcase>
+    <testcase classname="Chat Search Logic Date filter #1" name="Chat Search Logic Date filter #1" time="0.014">
+    </testcase>
+    <testcase classname="Chat Search Logic Date filter #2" name="Chat Search Logic Date filter #2" time="0.011">
+    </testcase>
+    <testcase classname="Chat Search Logic Combination filter #1" name="Chat Search Logic Combination filter #1" time="0.012">
+    </testcase>
+    <testcase classname="Chat Search Logic Combination filter #2" name="Chat Search Logic Combination filter #2" time="0.009">
+    </testcase>
+    <testcase classname="Chat Search Logic Empty filter" name="Chat Search Logic Empty filter" time="0.007">
+    </testcase>
+    <testcase classname="Chat Search Logic System filter: matches joined/left messages" name="Chat Search Logic System filter: matches joined/left messages" time="0.011">
+    </testcase>
+    <testcase classname="Chat Search Logic Search suggestions show on opening quote" name="Chat Search Logic Search suggestions show on opening quote" time="0.012">
+    </testcase>
+    <testcase classname="Chat Search Logic Clicking a suggestion replaces the last quote" name="Chat Search Logic Clicking a suggestion replaces the last quote" time="0.016">
+    </testcase>
+    <testcase classname="Chat Search Logic Clicking a suggestion appends keyword if no quote found" name="Chat Search Logic Clicking a suggestion appends keyword if no quote found" time="0.011">
+    </testcase>
+    <testcase classname="Chat Search Logic Edge Case: Defensive guards and missing elements" name="Chat Search Logic Edge Case: Defensive guards and missing elements" time="0.011">
+    </testcase>
+    <testcase classname="Chat Search Logic Edge Case: Clicking outside a suggestion item" name="Chat Search Logic Edge Case: Clicking outside a suggestion item" time="0.009">
     </testcase>
   </testsuite>
 </testsuites>
