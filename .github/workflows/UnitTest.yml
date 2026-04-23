@@ -66,5 +66,5 @@ jobs:
         # Start server in background
         npm start &
         sleep 3
-        # Run autocannon
-        npm run loadtest
+        # Run autocannon for multiple routes
+        npm run loadtest:routes

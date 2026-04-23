@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - report/.tmp-view-scripts/chat.inline-0.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>report/.tmp-view-scripts/chat.inline-0.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">69.48</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">204</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">31.73</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.16</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/* extracted from views/chat.ejs */
+// Constants
+        const socket = io();
+        const username = &#039;&quot;__EJS_TEMPLATE__&quot;&#039;;
+        const messages = document.getElementById(&#039;messages&#039;);
+        const messageForm = document.getElementById(&#039;messageForm&#039;);
+        const messageInput = document.getElementById(&#039;messageInput&#039;);
+        const usersList = document.getElementById(&#039;usersList&#039;);
+        const searchInput = document.getElementById(&#039;searchInput&#039;);
+
+        // Track last messages per user
+        const lastMessages = {};
+
+        // SVG icons
+        const userAvatarSVG = `&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z&quot;/&gt;&lt;/svg&gt;`;
+
+        // Join + Disconnect
+        socket.emit(&#039;join&#039;, username);
+
+        window.addEventListener(&#039;beforeunload&#039;, () =&gt; {
+            socket.disconnect();
+        });
+
+        // ── Helper: create a message element ──
+        function createMessageElement(data) {
+            const now = new Date();
+            const isSelf = data.username === username;
+            
+            let dateVal = &#039;&#039;;
+            let timeVal = &#039;&#039;;
+            if (data.time) {
+                if (data.time.includes(&#039;,&#039;)) {
+                    const parts = data.time.split(&#039;, &#039;);
+                    dateVal = parts[0];
+                    timeVal = parts[1];
+                } else {
+                    timeVal = data.time;
+                    dateVal = `${String(now.getDate()).padStart(2, &#039;0&#039;)}/${String(now.getMonth() + 1).padStart(2, &#039;0&#039;)}/${now.getFullYear()}`;
+                }
+            } else {
+                timeVal = now.toLocaleTimeString([], { hour: &#039;2-digit&#039;, minute: &#039;2-digit&#039; });
+                dateVal = `${String(now.getDate()).padStart(2, &#039;0&#039;)}/${String(now.getMonth() + 1).padStart(2, &#039;0&#039;)}/${now.getFullYear()}`;
+            }
+
+            // Store as last message
+            lastMessages[data.username] = data.message;
+            refreshUserCards();
+
+            const messageDiv = document.createElement(&#039;div&#039;);
+            messageDiv.className = &#039;message &#039; + (isSelf ? &#039;self&#039; : &#039;other&#039;);
+
+            messageDiv.innerHTML = `
+                &lt;div class=&quot;msg-avatar&quot;&gt;${userAvatarSVG}&lt;/div&gt;
+                &lt;div class=&quot;msg-content&quot;&gt;
+                    &lt;span class=&quot;msg-username&quot;&gt;${data.username}&lt;/span&gt;
+                    &lt;div class=&quot;msg-bubble&quot;&gt;&lt;span class=&quot;body&quot;&gt;${data.message}&lt;/span&gt;&lt;/div&gt;
+                    &lt;span class=&quot;msg-date&quot; style=&quot;display:none;&quot;&gt;${dateVal}&lt;/span&gt;
+                    &lt;span class=&quot;msg-time time&quot;&gt;${dateVal} ${timeVal}&lt;/span&gt;
+                &lt;/div&gt;
+            `;
+
+            return messageDiv;
+        }
+
+        // ── Helper: create a system message ──
+        function createSystemMessage(text) {
+            const messageDiv = document.createElement(&#039;div&#039;);
+            messageDiv.className = &#039;message system&#039;;
+            messageDiv.innerHTML = `&lt;em&gt;${text}&lt;/em&gt;`;
+            return messageDiv;
+        }
+
+        // ── Message form submit ──
+        messageForm.addEventListener(&#039;submit&#039;, (e) =&gt; {
+            e.preventDefault();
+            if (messageInput.value) {
+                socket.emit(&#039;chat message&#039;, { message: messageInput.value });
+                messageInput.value = &#039;&#039;;
+            }
+        });
+
+        // ── Search listener ──
+        const searchSuggestions = document.getElementById(&#039;searchSuggestions&#039;);
+        
+        function showSearchSuggestions(rawSearch) {
+            // Hide suggestions only when a complete keyword is already typed
+            const hasCompleteKeyword = rawSearch.includes(&#039;&quot;@&#039;) || rawSearch.includes(&#039;&quot;date:&#039;);
+            if (hasCompleteKeyword) {
+                searchSuggestions.classList.remove(&#039;show&#039;);
+            }
+            // Otherwise keep whatever state it&#039;s currently in (shown on focus)
+        }
+
+        // Show suggestions immediately on focus
+        searchInput.addEventListener(&#039;focus&#039;, () =&gt; {
+            searchSuggestions.classList.add(&#039;show&#039;);
+        });
+
+        searchInput.addEventListener(&#039;input&#039;, (e) =&gt; {
+            const rawSearch = e.target.value.toLowerCase();
+            
+            const userMatch = rawSearch.match(/&quot;@([^&quot;]+)&quot;/);
+            const dateMatch = rawSearch.match(/&quot;date:([^&quot;]+)&quot;/);
+            
+            let textSearch = rawSearch.replace(/&quot;@[^&quot;]*&quot;?/g, &#039;&#039;).replace(/&quot;date:[^&quot;]*&quot;?/g, &#039;&#039;).trim();
+            const targetUser = userMatch ? userMatch[1].toLowerCase() : null;
+            const targetDate = dateMatch ? dateMatch[1].toLowerCase() : null;
+            
+            const allMessages = messages.getElementsByClassName(&#039;message&#039;);
+
+            Array.from(allMessages).forEach((msg) =&gt; {
+                if (msg.classList.contains(&#039;system&#039;)) {
+                    msg.style.display = msg.textContent.toLowerCase().includes(rawSearch) ? &#039;flex&#039; : &#039;none&#039;;
+                    return;
+                }
+                const usernameText = msg.querySelector(&#039;.msg-username&#039;).textContent.toLowerCase() || &#039;&#039;;
+                const messageText = msg.querySelector(&#039;.body&#039;).textContent.toLowerCase() || &#039;&#039;;
+                const dateText = msg.querySelector(&#039;.msg-date&#039;).textContent.toLowerCase() || &#039;&#039;;
+
+                const matchesUser = !targetUser || usernameText.includes(targetUser);
+                const matchesDate = !targetDate || dateText.includes(targetDate);
+                const matchesText = !textSearch || messageText.includes(textSearch);
+
+                msg.style.display = (matchesUser &amp;&amp; matchesDate &amp;&amp; matchesText) ? &#039;flex&#039; : &#039;none&#039;;
+            });
+            showSearchSuggestions(rawSearch);
+        });
+
+        document.addEventListener(&#039;click&#039;, (e) =&gt; {
+            if (e.target !== searchInput &amp;&amp; !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.remove(&#039;show&#039;);
+            }
+        });
+
+        searchSuggestions.addEventListener(&#039;click&#039;, (e) =&gt; {
+            const suggestion = e.target.closest(&#039;.suggestion-item&#039;);
+            if (suggestion) {
+                const keyword = suggestion.getAttribute(&#039;data-val&#039;);
+                const currentVal = searchInput.value;
+                const lastQuoteIdx = currentVal.lastIndexOf(&#039;&quot;&#039;);
+                if (lastQuoteIdx !== -1) {
+                    searchInput.value = currentVal.substring(0, lastQuoteIdx) + keyword;
+                } else {
+                    searchInput.value += keyword;
+                }
+                searchSuggestions.classList.remove(&#039;show&#039;);
+                searchInput.focus();
+                searchInput.dispatchEvent(new Event(&#039;input&#039;));
+            }
+        });
+
+        // ── Chat history ──
+        socket.on(&#039;chat history&#039;, (history) =&gt; {
+            history.forEach(data =&gt; {
+                const el = createMessageElement(data);
+                messages.appendChild(el);
+            });
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        // ── New chat message ──
+        socket.on(&#039;chat message&#039;, (data) =&gt; {
+            const el = createMessageElement(data);
+            messages.appendChild(el);
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        // ── User joined / left ──
+        socket.on(&#039;user joined&#039;, (user) =&gt; {
+            messages.appendChild(createSystemMessage(`${user} joined the chat`));
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        socket.on(&#039;user left&#039;, (user) =&gt; {
+            messages.appendChild(createSystemMessage(`${user} left the chat`));
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        // ── User list (with cards) ──
+        let currentUsers = [];
+
+        function refreshUserCards() {
+            usersList.innerHTML = &#039;&#039;;
+            currentUsers.forEach(user =&gt; {
+                const userDiv = document.createElement(&#039;div&#039;);
+                userDiv.className = &#039;user-item&#039;;
+
+                const lastMsg = lastMessages[user] || &#039;last message from me&#039;;
+
+                userDiv.innerHTML = `
+                    &lt;div class=&quot;user-avatar&quot;&gt;${userAvatarSVG}&lt;/div&gt;
+                    &lt;div class=&quot;user-info&quot;&gt;
+                        &lt;div class=&quot;user-name&quot;&gt;${user}&lt;/div&gt;
+                        &lt;div class=&quot;user-last-msg&quot;&gt;${lastMsg}&lt;/div&gt;
+                    &lt;/div&gt;
+                `;
+                usersList.appendChild(userDiv);
+            });
+        }
+
+        socket.on(&#039;users update&#039;, (users) =&gt; {
+            currentUsers = users;
+            refreshUserCards();
+        });</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

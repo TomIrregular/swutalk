@@ -5,9 +5,11 @@
   "scripts": {
     "start": "node app.js",
     "test": "jest",
-    "plato": "plato -d report controllers models public app.js",
+    "plato:prepare-views": "node scripts/extract-view-scripts.js",
+    "plato": "npm run plato:prepare-views && plato -d report \"controllers/**/*.js\" \"models/**/*.js\" \"report/.tmp-view-scripts/**/*.js\" \"app.js\"",
     "performance": "clinic doctor --dest report -- node app.js",
-    "loadtest": "autocannon -c 10 -d 10 http://localhost:3000/ --json > report/loadtest.json"
+    "loadtest": "autocannon -c 10 -d 10 http://localhost:3000/ --json > report/loadtest.json",
+    "loadtest:routes": "node -e \"require('fs').mkdirSync('report',{recursive:true})\" && autocannon -c 10 -d 10 http://localhost:3000/ --json > report/loadtest-home.json && autocannon -c 10 -d 10 http://localhost:3000/setup-profile --json > report/loadtest-setup-profile.json && autocannon -c 10 -d 10 http://localhost:3000/chat --json > report/loadtest-chat.json"
   },
   "jest": {
     "collectCoverage": true,
