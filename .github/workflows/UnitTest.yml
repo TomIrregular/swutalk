@@ -45,6 +45,11 @@ jobs:
       run: |
         cd chatapp
         npm run plato
+    - name: Upload Plato Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: plato-reports
+        path: chatapp/report/
 
   # Job 3: รัน Load Testing (Autocannon) แบบขนาน
   load-test:
