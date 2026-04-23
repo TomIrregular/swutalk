@@ -68,3 +68,8 @@ jobs:
         sleep 3
         # Run autocannon for multiple routes
         npm run loadtest:routes
+    - name: Upload Autocannon Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: autocannon-reports
+        path: chatapp/report/*.json
