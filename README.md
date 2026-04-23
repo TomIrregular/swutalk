@@ -136,6 +136,8 @@ Dynamic Profiling: ใช้ Autocannon สำหรับทดสอบรั�
     4.1 Job: Run Tests: มีหน้าที่ติดตั้ง Node.js ติดตั้ง Dependencies และรันคำสั่ง npm test เพื่อตรวจสอบโค้ดด้วย Jest ว่าทำงานถูกต้องตาม Testcases ที่กำหนดไว้หรือไม่ (ทั้ง Logic และ UI)  
     4.2 Job: Static Profiling: มีหน้าที่นำโค้ดมารันสคริปต์ npm run plato เพื่อสร้างรายงาน Static Analysis เช็คหาจุดที่โค้ดเขียนซับซ้อนเกินไป หรือยากต่อการดูแลรักษา (Maintainability)  
   4.3 Job: Dynamic Profiling: เครื่องนี้จะทำการจำลองเป็นเซิร์ฟเวอร์จริง โดยรันคำสั่ง npm start เอาไว้เป็น Background Process จากนั้นรันคำสั่ง npm run loadtest (Autocannon) เพื่อจำลองคนยิง Request เข้ามาจำนวนมาก   เพื่อตรวจสอบว่าแอปพลิเคชันยังตอบสนองได้เร็วและไม่ล่ม  
+  4.4 Job:Deploy to Render: มีหน้าที่ตรวจสอบโค้ดว่าผ่านการทดสอบหรือไม่ และถ้าผ่านจะทำการ deploy โค้ดไปยัง Render 
+  
 
 ## Bug เเละ ปัญหาที่ถูกพบ  
 ยังไม่พบบัคในเวอร์ชั่นล่าสุด  
