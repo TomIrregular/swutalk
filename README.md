@@ -120,11 +120,11 @@ Managing Arrays/Objects: มีการจัดการ List ผู้ใช�
 ![Test coverage report](picture/newtest.png)  
 
 ## Static profiling 
-# Phase 3 
+### Phase 3 
 ![line of code](picture/report/phase3.png) 
 ![complexity](picture/report/phase3_1.png) 
 
-# Phase 4 
+### Phase 4 
 ![line of code](picture/report/phase4.png) 
 ![complexity](picture/report/phase4_1.png) 
 
