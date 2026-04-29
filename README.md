@@ -126,9 +126,14 @@ Managing Arrays/Objects: มีการจัดการ List ผู้ใช�
 
 # Phase 4 
 ![line of code](picture/report/phase4.png) 
-![line of cide](picture/report/phase4_1.png) 
+![complexity](picture/report/phase4_1.png) 
 
 เปรียบเทียบกันเเล้วใน phase 4 ค่า maintainablity เพิ่มขึ้นมาเล็กน้อย เเต่ complexity เยอะขึ้นมากจาก phase 3  
+
+## Dynamic profiling  
+![lighthouse](picture/report/dynamic_1.png)  
+![clinic](picture/report/dynamic_2.png)  
+
 
 ## CI/CD Pipeline
 1. วัตถุประสงค์ของการทำ CI (Objective) อธิบายว่าเราสร้าง Pipeline   นี้ขึ้นมาเพื่อ "ควบคุมคุณภาพของระบบแบบอัตโนมัติ"  ทุกครั้งที่มีคนเขียนโค้ดเพิ่มหรือแก้ไข (Push/Pull Request) ระบบจะต้องตรวจสอบความถูกต้องและประสิทธิภาพทันที เพื่อป้องกันไม่ให้โค้ดที่พังหรือไม่ได้มาตรฐานหลุดเข้าไปในระบบจริง
