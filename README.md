@@ -117,7 +117,7 @@ Time Formatting: เมื่อมีแชทถูกส่งเข้าม
 Managing Arrays/Objects: มีการจัดการ List ผู้ใช้ออนไลน์ เช่นการเอาชื่อใส่ (User.addUser) และเอาชื่อออก (User.removeUser) เมื่อผู้ใช้คนนั้นหลุดการเชื่อมต่อ  แล้วค่อยส่งรายชื่อแจ้งทุกคนในห้อง  
 
 ## Test case
-![Test coverage report](picture/test3.png)  
+![Test coverage report](picture/newtest.png)  
 
 ## Static profiling 
 # Phase 3 
@@ -197,3 +197,16 @@ Dynamic Profiling: ใช้ Autocannon สำหรับทดสอบรั�
  2. รายงานบั๊กว่าเจออันไหน  
  3. รายงานปัญหาเรื่องเวลาระหว่างทำงาน  
  4. คุยกันเรื่องที่จะปรึกษาอาจารย์เรื่องขอบเขตคะเเนน  
+
+
+## สรุป Retrospective 4
+คลิปวิดิโอ : https://youtu.be/gOh2_p2ZfBc
+สิ่งที่ได้จากการคุยกันใน retro : 
+  1. แก้ปัญหาจากบั๊กจาก phase ที่แล้วที่พบ ส่วนของ ui, logic search ต่างๆ
+  2. มีการเพิ่ม logic เข้าไปเพื่อให้ผู้ใช้งานใช้ได้ง่ายมากขึ้น
+  3. รายงานเรื่อง profiling ว่าผลเป็นอย่างไร
+  4. พูดคุยการทำงานใน phase นี้ว่าติดปัญหาอะไรไหม
+
+## สิ่งที่แก้ไม่ได้และจะแก้ในอนาคต  
+  1. ไม่มี Format Commit ระหว่างกลุ่มทำให้ Comment ดูไม่เป็นระเบียบและเข้าใจยาก เเละไม่มี commit convention  
+  2. ไม่ได้เเยกเอกสารออกมาเป็น phase 1 , 2 , 3 , 4 

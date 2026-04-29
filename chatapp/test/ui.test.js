@@ -9,6 +9,7 @@
  * โดยไม่ต้องเปิดเบราว์เซอร์จริง ทำให้สามารถทดสอบพฤติกรรม UI ได้อย่างรวดเร็ว
  */
 describe('UI Testcases', () => {
+    const { createSystemMessage, createMessageElement } = require('./uiLogic');
 
     /**
      * Testcase 1: ทดสอบสถานะเริ่มต้นและการสลับสถานะของ Checkbox "Remember me"
@@ -89,13 +90,6 @@ describe('UI Testcases', () => {
      *   3. ตรวจสอบว่า innerHTML ของ Element เท่ากับ '<em>bhakin left the chat</em>' (จัดรูปแบบถูกต้อง)
      */
     test('Testcase 3: System message UI generation is formatted correctly', () => {
-        function createSystemMessage(text) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message system';
-            messageDiv.innerHTML = `<em>${text}</em>`;
-            return messageDiv;
-        }
-        
         const msgElement = createSystemMessage('bhakin left the chat');
         
         // Expected Result: Element should have correct class and inner HTML wrapper
@@ -117,13 +111,6 @@ describe('UI Testcases', () => {
      *   3. ตรวจสอบว่า Element ไม่มี class 'other'
      */
     test('Testcase 4: User chat message (Self) alignment and classes', () => {
-        function createMessageElement(data, currentUser) {
-            const isSelf = data.username === currentUser;
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + (isSelf ? 'self' : 'other');
-            return messageDiv;
-        }
-        
         const msgElement = createMessageElement({ username: 'aa', message: 'Hi' }, 'aa');
         
         // Expected Result: Should be marked as "self" for right alignment
@@ -145,13 +132,6 @@ describe('UI Testcases', () => {
      *   3. ตรวจสอบว่า Element ไม่มี class 'self'
      */
     test('Testcase 5: User chat message (Other) alignment and classes', () => {
-        function createMessageElement(data, currentUser) {
-            const isSelf = data.username === currentUser;
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + (isSelf ? 'self' : 'other');
-            return messageDiv;
-        }
-        
         const msgElement = createMessageElement({ username: 'bhakin', message: 'Hello' }, 'aa');
         
         // Expected Result: Should be marked as "other" for left alignment
